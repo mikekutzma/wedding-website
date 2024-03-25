@@ -242,8 +242,19 @@ $(document).ready(function () {
   $("#add-to-cal").html(myCalendar);
 
   /********************** RSVP **********************/
+  var rsvpCode = new URLSearchParams(window.location.search).get("code", "0");
+  $("#invite_code").val(rsvpCode);
   $("#rsvp-form").on("submit", function (e) {
     e.preventDefault();
+
+    $("#users-div")
+      .find(".drinking-checkbox")
+      .each(function () {
+        if (!$(this).checked) {
+          $(this).checked = true;
+          $(this).value = "No";
+        }
+      });
     var data = $(this).serialize();
 
     $("#alert-wrapper").html(
@@ -253,10 +264,7 @@ $(document).ready(function () {
       )
     );
 
-    if (
-      MD5($("#invite_code").val()) !== "b0e53b10c1f55ede516b240036b88f40" &&
-      MD5($("#invite_code").val()) !== "2ac7f43695eb0479d5846bb38eec59cc"
-    ) {
+    if (MD5($("#invite_code").val()) !== "11e1c7e8dd36f6c9c248881928393727") {
       $("#alert-wrapper").html(
         alert_markup(
           "danger",
@@ -264,8 +272,9 @@ $(document).ready(function () {
         )
       );
     } else {
+      console.log(data);
       $.post(
-        "https://script.google.com/macros/s/AKfycbyo0rEknln8LedEP3bkONsfOh776IR5lFidLhJFQ6jdvRiH4dKvHZmtoIybvnxpxYr2cA/exec",
+        "https://script.google.com/macros/s/AKfycbxxyr7Ibvaa1YWnblzWqwk0zY-xqP-4yWkUduPp_HUOkPsVnBi55hhH-NcHiFVlKGyOmw/exec",
         data
       )
         .done(function (data) {
@@ -362,6 +371,38 @@ function alert_markup(alert_type, msg) {
     msg +
     '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>&times;</span></button></div>'
   );
+}
+
+// Add plus ones
+
+function addPlusOne() {
+  var cont = document.getElementById("users-div");
+  var input = document.createElement("div");
+  input.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6 col-sm-4">
+                            <div class="form-input-group">
+                                <i class="fa fa-user"></i><input name="name" class=""
+                                                                 placeholder="Their name"
+                                                                 required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-4">
+                            <div class="form-input-group">
+                                <i class="fa fa-envelope"></i><input type="email" name="email" class=""
+                                                                     placeholder="Their email">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-4">
+                            <div class="form-input-group">
+                                <i class="fas fa-cocktail"></i>
+                                <input type="checkbox" name="over21" value="Yes" class="drinking-checkbox">
+                            </div>
+                        </div>
+                    </div>
+                    `;
+  cont.appendChild(input);
+  document.getElementById("rsvp-btn").innerHTML = "That's us";
 }
 
 // MD5 Encoding
