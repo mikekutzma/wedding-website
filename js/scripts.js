@@ -396,7 +396,8 @@ function addPlusOne() {
                         <div class="col-md-6 col-sm-4">
                             <div class="form-input-group">
                                 <i class="fas fa-cocktail"></i>
-                                <input type="checkbox" name="over21" value="Yes" class="drinking-checkbox">
+                                <input type="checkbox" name="over21" value="Yes" id="drinking-checkbox" class="drinking-checkbox" checked>
+                                <label for="drinking-checkbox">Over 21?</label>
                             </div>
                         </div>
                     </div>

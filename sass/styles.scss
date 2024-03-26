@@ -838,6 +838,24 @@ RSVP form
         border-radius: 6px;
         border: none;
       }
+      input.drinking-checkbox {
+        height: 85%;
+      }
+      input[type="checkbox"] + label {
+          display: inline-block;
+          cursor: pointer;
+          color: rgba(28, 54, 83, 0.6);
+          margin-bottom: 10px;
+          font-weight: lighter;
+          font-size: 13px;
+        transform: translateY(-190%) translateX(140%);
+      }
+      input[type="checkbox"]:not(:checked) + label {
+          text-decoration:line-through;
+      }
+      input[type="checkbox"]:checked + label {
+          text-decoration:none;
+      }
       input::-webkit-input-placeholder {
         color: $form-placeholder;
       }
