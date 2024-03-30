@@ -274,7 +274,7 @@ $(document).ready(function () {
     } else {
       console.log(data);
       $.post(
-        "https://script.google.com/macros/s/AKfycbxxyr7Ibvaa1YWnblzWqwk0zY-xqP-4yWkUduPp_HUOkPsVnBi55hhH-NcHiFVlKGyOmw/exec",
+        "https://script.google.com/macros/s/AKfycbxPr-ZkEzrl0IdhifSBno027PYi9mfNJQDwLpxqKDdN-PUico3fShyzWL3fiO8ka4Sf/exec",
         data
       )
         .done(function (data) {
@@ -396,8 +396,11 @@ function addPlusOne() {
                         <div class="col-md-6 col-sm-4">
                             <div class="form-input-group">
                                 <i class="fas fa-cocktail"></i>
-                                <input type="checkbox" name="over21" value="Yes" id="drinking-checkbox" class="drinking-checkbox" checked>
-                                <label for="drinking-checkbox">Over 21?</label>
+                                <select name="over21" id="over21" required>
+                                    <option value="">Are they over 21?</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
                             </div>
                         </div>
                     </div>
